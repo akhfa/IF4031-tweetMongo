@@ -25,12 +25,11 @@ public class TweetMongo {
 
             BasicDBObject document = new BasicDBObject();
 
-            document.put("name", "akhfa2");
+            document.put("name", "akhfa3");
             document.put("umur", "22");
             document.put("createdDate", new Date());
-            table.insert(document);
 
-            System.out.println("okeee");
+            System.out.println(table.insert(document));
         }catch (UnknownHostException e)
         {
 
