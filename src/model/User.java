@@ -1,12 +1,11 @@
 package model;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
+import com.mongodb.*;
 import helper.Response;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+
 
 /**
  * Created by akhfa on 16/11/15.
@@ -28,9 +27,7 @@ public class User {
 
     public boolean save()
     {
-        DB db = Connection.getDatabase();
-
-        DBCollection table = db.getCollection("users");
+        DBCollection table = Connection.getTable("users");
 
         BasicDBObject document = new BasicDBObject();
         document.put("username", username);
@@ -54,5 +51,13 @@ public class User {
             return true;
         else
             return false;
+    }
+
+    public static boolean isExist(String username)
+    {
+        DBCollection table = Connection.getTable("users");
+        BasicDBObject query = new BasicDBObject("username", username);
+        DBObject doc = table.findOne(query);
+        return doc != null;
     }
 }
