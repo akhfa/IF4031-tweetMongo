@@ -49,9 +49,6 @@ public class Friend {
 
         System.out.println(response);
 
-        if(response.get("ok").equals(1l))
-            return true;
-        else
-            return false;
+        return response.get("ok").equals(1l);
     }
 }

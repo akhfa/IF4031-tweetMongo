@@ -47,10 +47,7 @@ public class User {
             System.exit(1);
         }
 
-        if(response.get("ok").equals(1l))
-            return true;
-        else
-            return false;
+        return response.get("ok").equals(1l);
     }
 
     public static boolean isExist(String username)
