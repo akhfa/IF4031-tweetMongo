@@ -20,7 +20,11 @@ public class Tweet {
         this.body = _body;
     }
 
-    public boolean save()
+    /**
+     * Menyimpan tweets
+     * @return Id dari tweets yang tersimpan. return fail jika gagal.
+     */
+    public String save()
     {
         DBCollection table = Connection.getTable("tweets");
 
@@ -42,6 +46,13 @@ public class Tweet {
             System.exit(1);
         }
 
-        return response.get("ok").equals(1l);
+        if(response.get("ok").equals(1l))
+        {
+            return document.get("_id").toString();
+        }
+        else
+        {
+            return "fail";
+        }
     }
 }
