@@ -1,9 +1,6 @@
 package model;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.DBCursor;
+import com.mongodb.*;
 import helper.Response;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -56,19 +53,19 @@ public class Follower {
     public static ArrayList<String> getAllFollowerFrom(String _username)
     {
         ArrayList<String> daftarFollower = new ArrayList<>();
-        DB db = Connection.getDatabase();
-        DBCollection collection = db.getCollection("followers");
+        DBCollection collection = Connection.getTable("followers");
         BasicDBObject query = new BasicDBObject("username", _username);
         DBCursor cursor = collection.find(query);
 
-        while (cursor.hasNext())
-        {
-            try {
-                JSONObject followerJSON = (JSONObject) new JSONParser().parse(cursor.next().toString());
-                daftarFollower.add(followerJSON.get("follower").toString());
-            } catch (ParseException e) {
-                e.printStackTrace();
+        try {
+            while (cursor.hasNext())
+            {
+                DBObject doc = cursor.next();
+                daftarFollower.add(doc.get("follower").toString());
             }
+        }
+        finally {
+            cursor.close();
         }
 
         for(String follower:daftarFollower)
