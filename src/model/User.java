@@ -50,11 +50,19 @@ public class User {
         return response.get("ok").equals(1l);
     }
 
-    public static boolean isExist(String username)
+    public boolean exist()
     {
         DBCollection table = Connection.getTable("users");
         BasicDBObject query = new BasicDBObject("username", username);
         DBObject doc = table.findOne(query);
         return doc != null;
+    }
+
+    public boolean login()
+    {
+        DBCollection table = Connection.getTable("users");
+        BasicDBObject query = new BasicDBObject("username", username);
+        DBObject doc = table.findOne(query);
+        return doc.get("password").equals(password);
     }
 }
