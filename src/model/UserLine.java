@@ -1,12 +1,12 @@
 package model;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBCollection;
+import com.mongodb.*;
 import helper.Response;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -47,5 +47,33 @@ public class UserLine {
         }
 
         return response.get("ok").equals(1l);
+    }
+
+    public static ArrayList<TweetContainer> getAllTweetFrom(String _username)
+    {
+        ArrayList<TweetContainer> tweets = new ArrayList<>();
+        DBCollection userlineTable = Connection.getTable("userline");
+
+        BasicDBObject query = new BasicDBObject("username", _username);
+
+        DBCursor cursor = userlineTable.find(query);
+
+        try{
+            while(cursor.hasNext())
+            {
+                DBCollection tweetTable = Connection.getTable("tweets");
+                BasicDBObject tweetQueryId = new BasicDBObject("_id",cursor.next().get("tweet_id"));
+                DBObject tweetDb = tweetTable.findOne(query);
+
+                TweetContainer tweet = new TweetContainer(tweetDb.get("username").toString(),
+                                                            tweetDb.get("body").toString());
+
+                tweets.add(tweet);
+            }
+        }
+        finally {
+            cursor.close();
+        }
+        return tweets;
     }
 }
