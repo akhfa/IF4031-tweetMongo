@@ -67,11 +67,6 @@ public class Follower {
         finally {
             cursor.close();
         }
-
-        for(String follower:daftarFollower)
-        {
-            System.out.println(follower);
-        }
         return daftarFollower;
     }
 }
