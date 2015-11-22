@@ -5,6 +5,7 @@ import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
 import controller.Logic;
+import helper.Print;
 
 import java.net.UnknownHostException;
 import java.util.Date;
@@ -28,13 +29,9 @@ public class TweetMongo {
             {
                 if(first)
                 {
-                    System.out.println("Selamat Datang");
+                    System.out.println("Selamat Datang di Tweet with Mongo Database by Akhmad Fakhoni Listiyan Dede");
                     first = false;
                 }
-
-                System.out.println("To register,    ketik: reg [username] [password]");
-                System.out.println("To login,       ketik: login [username] [password]");
-                System.out.println("To exit,        ketik: exit");
                 Scanner in = new Scanner(System.in);
                 System.out.print("guest:~$ ");
                 String command = in.nextLine();
@@ -67,8 +64,11 @@ public class TweetMongo {
                     case "exit":
                         System.exit(0);
                         break;
+                    case "help":
+                        Print.guestHelp();
+                        break;
                     default:
-                        System.out.println("Wrong command");
+                        System.out.println("Wrong command. Ketik 'help' untuk bantuan.");
                 }
             }
             else
@@ -78,11 +78,6 @@ public class TweetMongo {
                     System.out.println("Selamat datang " + username);
                     first = false;
                 }
-                System.out.println("To follow,          ketik: follow [username]");
-                System.out.println("To send tweet,      ketik: tweet [body]");
-                System.out.println("To see userline,    ketik: userline");
-                System.out.println("To see timeline,    ketik: timeline");
-                System.out.println("To logout,          ketik: logout");
                 Scanner in = new Scanner(System.in);
                 System.out.print(username + ":~$ ");
                 String command = in.nextLine();
@@ -119,8 +114,11 @@ public class TweetMongo {
                     case "logout":
                         guest = true;
                         break;
+                    case "help":
+                        Print.userHelp();
+                        break;
                     default:
-                        System.out.println("Wrong command");
+                        System.out.println("Wrong command. Ketik 'help' untuk bantuan.");
                 }
             }
         }
