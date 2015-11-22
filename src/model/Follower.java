@@ -1,12 +1,15 @@
 package model;
 
 import com.mongodb.BasicDBObject;
+import com.mongodb.DB;
 import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
 import helper.Response;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -48,5 +51,30 @@ public class Follower {
         }
 
         return response.get("ok").equals(1l);
+    }
+
+    public static ArrayList<String> getAllFollowerFrom(String _username)
+    {
+        ArrayList<String> daftarFollower = new ArrayList<>();
+        DB db = Connection.getDatabase();
+        DBCollection collection = db.getCollection("followers");
+        BasicDBObject query = new BasicDBObject("username", _username);
+        DBCursor cursor = collection.find(query);
+
+        while (cursor.hasNext())
+        {
+            try {
+                JSONObject followerJSON = (JSONObject) new JSONParser().parse(cursor.next().toString());
+                daftarFollower.add(followerJSON.get("follower").toString());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
+        for(String follower:daftarFollower)
+        {
+            System.out.println(follower);
+        }
+        return daftarFollower;
     }
 }
