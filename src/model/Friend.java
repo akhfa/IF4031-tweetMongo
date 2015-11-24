@@ -47,8 +47,6 @@ public class Friend {
             System.exit(1);
         }
 
-        System.out.println(response);
-
         return response.get("ok").equals(1l);
     }
 }

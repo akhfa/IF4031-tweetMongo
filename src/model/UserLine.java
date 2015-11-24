@@ -2,6 +2,7 @@ package model;
 
 import com.mongodb.*;
 import helper.Response;
+import org.bson.types.ObjectId;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -62,8 +63,8 @@ public class UserLine {
             while(cursor.hasNext())
             {
                 DBCollection tweetTable = Connection.getTable("tweets");
-                BasicDBObject tweetQueryId = new BasicDBObject("_id",cursor.next().get("tweet_id"));
-                DBObject tweetDb = tweetTable.findOne(query);
+                BasicDBObject tweetQueryId = new BasicDBObject("_id",new ObjectId(cursor.next().get("tweet_id").toString()));
+                DBObject tweetDb = tweetTable.findOne(tweetQueryId);
 
                 TweetContainer tweet = new TweetContainer(tweetDb.get("username").toString(),
                                                             tweetDb.get("body").toString());

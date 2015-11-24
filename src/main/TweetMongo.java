@@ -1,14 +1,8 @@
 package main;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.MongoClient;
 import controller.Logic;
 import helper.Print;
 
-import java.net.UnknownHostException;
-import java.util.Date;
 import java.util.Scanner;
 
 /**
