@@ -29,13 +29,13 @@ http://sister.akhfa.me/9-mongo/
 ##### Git ada di alamat berikut <br>
 https://github.com/akhfa/IF4031-tweetMongo.git<br>
 
-Cara menjalankan program:<br>
+##### Cara menjalankan program:<br>
 	Masuk ke folder bin<br>
 	java -jar tweetMongo.jar<br>
 <br>
-Query untuk melakukan 5 hal di atas:<br>
+##### Query untuk melakukan 5 hal di atas:<br>
 	<br>
-	Register<br>
+	##### Register<br>
 	db.users.insert(<br>
 ... {<br>
 ... "username" : "akhfa2",<br>
@@ -43,10 +43,10 @@ Query untuk melakukan 5 hal di atas:<br>
 ... }<br>
 ... )<br>
 
-	Login<br>
+	##### Login<br>
 	db.users.find({"username" : "akhfa2"})<br>
 <br>
-	Friend<br>
+	##### Friend<br>
 	db.friends.insert(<br>
 ... {<br>
 ... "username" : "akhfa2",<br>
@@ -55,7 +55,7 @@ Query untuk melakukan 5 hal di atas:<br>
 ... }<br>
 ... )<br>
 <br>
-	Followers<br>
+	##### Followers<br>
 	db.followers.insert(<br>
 ... {<br>
 ... "username" : "akhfa2",<br>
@@ -64,7 +64,7 @@ Query untuk melakukan 5 hal di atas:<br>
 ... }<br>
 ... )<br>
 <br>
-	Tweet<br>
+	##### Tweet<br>
 	db.tweets.insert(<br>
 ... {<br>
 ... "username" : "akhfa",<br>
@@ -72,7 +72,7 @@ Query untuk melakukan 5 hal di atas:<br>
 ... }<br>
 ... )<br>
 <br>
-	Userline<br>
+	##### Userline<br>
 	db.userline.insert(<br>
 ... {<br>
 ... "username" : "akhfa",<br>
@@ -81,7 +81,7 @@ Query untuk melakukan 5 hal di atas:<br>
 ... }<br>
 ... )<br>
 
-	Timeline<br>
+	##### Timeline<br>
 	db.timeline.insert(<br>
 ... {<br>
 ... "username" : "akhfa",<br>
@@ -90,35 +90,35 @@ Query untuk melakukan 5 hal di atas:<br>
 ... }<br>
 ... )<br>
 <br>
-	Untuk memasukkan ke tiap username, maka perlu get follower terlebih dahulu berdasarkan username tertentu<br>
+	##### Untuk memasukkan ke tiap username, maka perlu get follower terlebih dahulu berdasarkan username tertentu<br>
 	db.followers.find({"username" : "akhfa2"})<br>
 <br>
-	Menampilkan tweet berdasarkan user tertentu<br>
+	##### Menampilkan tweet berdasarkan user tertentu<br>
 	db.tweets.find({"username" : "akhfa2"})<br>
 <br>
 <br>
-	Menampilkan userline untuk setiap user, cari dulu di tabel userline<br>
+	##### Menampilkan userline untuk setiap user, cari dulu di tabel userline<br>
 	db.userline.find({"username" : "user2"})<br>
 <br>
 	Kemudian akan didapatkan hasil seperti berikut: { "_id" : ObjectId("5653f9422b5ea272cf972654"), "username" : "user2", "time" : ISODate("2015-11-24T05:44:34.160Z"), "tweet_id" : "5653f9422b5ea272cf972653" }<br>
 <br>
-	Ambil tweet_id nya, dan cari di collection tweets<br>
+	##### Ambil tweet_id nya, dan cari di collection tweets<br>
 	db.tweets.find(<br>
 ... {<br>
 ... "_id" : ObjectId("5653f9422b5ea272cf972653")<br>
 ... }<br>
 ... )<br>
 <br>
-	Dan akan muncul tweetnya<br>
+	##### Dan akan muncul tweetnya<br>
 	{ "_id" : ObjectId("5653f9422b5ea272cf972653"), "username" : "user2", "body" : "halo user 3 setelah memfollow user 4" }<br>
 <br>
 <br>
-	Untuk menampilkan timeline, cari dulu di tabel timeline<br>
+	##### Untuk menampilkan timeline, cari dulu di tabel timeline<br>
 	db.userline.find({"username" : "user2"})<br>
 <br>
 	Akan muncul seperti berikut: { "_id" : ObjectId("5653f8ff2b5ea272cf972650"), "username" : "user2", "time" : ISODate("2015-11-24T05:43:27.254Z"), "tweet_id" : "5653f8ff2b5ea272cf97264e" }<br>
 <br>
-	Baru cari dari collections tweets berdasarkan tweet_id<br>
+	##### Baru cari dari collections tweets berdasarkan tweet_id<br>
 	db.tweets.find( { "_id" : ObjectId("5653f8ff2b5ea272cf97264e") } )<br>
 
 
